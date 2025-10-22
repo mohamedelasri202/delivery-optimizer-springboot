@@ -25,4 +25,11 @@ public class VehicleController {
         return ResponseEntity.created(URI.create("/vehicles" + created.getId()))
                 .body(created);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Vehicle> update(@PathVariable Integer id, @RequestBody Vehicle vehicle) {
+        vehicle.setId(id);
+        Vehicle updated = vehicleService.update(vehicle);
+        return ResponseEntity.ok(updated);
+    }
 }

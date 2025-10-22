@@ -16,4 +16,9 @@ public class VehicleService implements VehicleServiceInterface {
     public Vehicle create(Vehicle vehicle) {
         return vehicleRepository.save(vehicle);
     }
+
+    @Transactional
+    public Vehicle update(Vehicle vehicle) {
+        return vehicleRepository.save(vehicle);
+    }
 }
