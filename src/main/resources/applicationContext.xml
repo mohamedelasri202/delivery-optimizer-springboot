@@ -23,5 +23,13 @@
         <constructor-arg ref="vehicleRepository" />
     </bean>
 
+    <bean id="deliveryService" class="com.deliveryoptimizer.Service.DeliveryService">
+        <constructor-arg ref="deliveryRepository"/>
+    </bean>
+
+    <bean id="wareHouseService" class="com.deliveryoptimizer.Service.WareHouseService">
+        <constructor-arg ref="wareHouseRepository"/>
+    </bean>
+
 
 </beans>
