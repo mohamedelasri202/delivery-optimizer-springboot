@@ -6,4 +6,5 @@ import com.deliveryoptimizer.Model.Warehouse;
 public interface WareHouseServiceInterface {
 
         Warehouse createWarehouse(Warehouse warehouse);
+        Boolean deleteWarehouse(int id);
 }

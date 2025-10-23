@@ -17,4 +17,22 @@ public class WareHouseService implements WareHouseServiceInterface {
     public Warehouse createWarehouse(Warehouse warehouse) {
         return wareHouseRepository.save(warehouse);
     }
+
+
+    @Transactional
+    public Warehouse updateWarehouse(int id, Warehouse warehouse) {
+        return wareHouseRepository.save(warehouse);
+    }
+
+
+
+
+    @Transactional
+    public Boolean deleteWarehouse(int id) {
+       return wareHouseRepository.findById(id).map(warehouse ->{
+            wareHouseRepository.delete(warehouse);
+            return true;
+        }).orElse(false);
+
+    }
 }
