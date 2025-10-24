@@ -1,51 +1,53 @@
 package com.deliveryoptimizer.Controller;
 
-
+import com.deliveryoptimizer.DTO.WarehouseDTO;
+import com.deliveryoptimizer.Mapper.WarehouseMapper;
 import com.deliveryoptimizer.Model.Warehouse;
 import com.deliveryoptimizer.Service.WareHouseServiceInterface;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/WarHouse")
+@RequestMapping("api/warehouse")
 public class WareHouseController {
-    private final WareHouseServiceInterface wareHouseServiceInterface;
 
-    public WareHouseController(WareHouseServiceInterface warehouseService) {
-        this.wareHouseServiceInterface = warehouseService;
+    private final WareHouseServiceInterface wareHouseService;
+    private final WarehouseMapper warehouseMapper;
 
+    public WareHouseController(WareHouseServiceInterface wareHouseService, WarehouseMapper warehouseMapper) {
+        this.wareHouseService = wareHouseService;
+        this.warehouseMapper = warehouseMapper;
     }
 
+    // ✅ CREATE Warehouse
     @PostMapping
-    public ResponseEntity<Warehouse> createWarehouse(@RequestBody Warehouse warehouse) {
-        wareHouseServiceInterface.createWarehouse(warehouse);
-        return ResponseEntity.ok(warehouse);
+    public ResponseEntity<WarehouseDTO> createWarehouse(@RequestBody WarehouseDTO warehouseDTO) {
+        Warehouse warehouse = warehouseMapper.toEntity(warehouseDTO);
+        Warehouse created = wareHouseService.createWarehouse(warehouse);
+        WarehouseDTO responseDTO = warehouseMapper.toDTO(created);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }
 
+    // ✅ UPDATE Warehouse
     @PutMapping("/{id}")
-    public ResponseEntity<Warehouse>updateWarehouse(@PathVariable int id, @RequestBody Warehouse warehouse) {
+    public ResponseEntity<WarehouseDTO> updateWarehouse(@PathVariable int id, @RequestBody WarehouseDTO warehouseDTO) {
+        Warehouse warehouse = warehouseMapper.toEntity(warehouseDTO);
         warehouse.setId(id);
-        return ResponseEntity.ok(warehouse);
+        Warehouse updated = wareHouseService.updateWarehouse(id, warehouse);
+        WarehouseDTO responseDTO = warehouseMapper.toDTO(updated);
+        return ResponseEntity.ok(responseDTO);
     }
 
-
-
-
-
-
+    // ✅ DELETE Warehouse
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteWarehouse(@PathVariable Integer id) {
-
-        Boolean delete = wareHouseServiceInterface.deleteWarehouse(id);
-        if(delete){
-            return ResponseEntity.ok("wareHouse with id " + id +" deleted successfully");
-        }else {
-            return ResponseEntity.ok("WareHouse with id " + id + " wasn't found");
+    public ResponseEntity<String> deleteWarehouse(@PathVariable int id) {
+        Boolean deleted = wareHouseService.deleteWarehouse(id);
+        if (deleted) {
+            return ResponseEntity.ok("Warehouse with id " + id + " deleted successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Warehouse with id " + id + " not found");
         }
-
-
     }
-
-
-
 }

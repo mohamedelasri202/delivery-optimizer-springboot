@@ -28,9 +28,10 @@
     <bean id="deliveryService" class="com.deliveryoptimizer.Service.DeliveryService">
         <constructor-arg ref="deliveryRepository"/>
     </bean>
-
+    <bean id="warehouseMapper" class="com.deliveryoptimizer.Mapper.WarehouseMapperImpl" />
     <bean id="wareHouseService" class="com.deliveryoptimizer.Service.WareHouseService">
         <constructor-arg ref="wareHouseRepository"/>
+        <constructor-arg ref="warehouseMapper"/>
     </bean>
 
 
