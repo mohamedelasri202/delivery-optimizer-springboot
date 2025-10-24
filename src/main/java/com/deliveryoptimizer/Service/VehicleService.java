@@ -1,32 +1,37 @@
 package com.deliveryoptimizer.Service;
 
+import com.deliveryoptimizer.DTO.VehicleDTO;
+import com.deliveryoptimizer.Mapper.VehicleMapper;
 import com.deliveryoptimizer.Model.Vehicle;
 import com.deliveryoptimizer.Repositories.VehicleRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+import java.util.List;
 
 public class VehicleService implements VehicleServiceInterface {
 
     private final VehicleRepository vehicleRepository;
+    private final VehicleMapper vehicleMapper;
 
-    public VehicleService(VehicleRepository vehicleRepository) {
+    public VehicleService(VehicleRepository vehicleRepository, VehicleMapper vehicleMapper) {
         this.vehicleRepository = vehicleRepository;
+        this.vehicleMapper = vehicleMapper;
     }
 
     @Transactional
-    public Vehicle create(Vehicle vehicle) {
-        return vehicleRepository.save(vehicle);
+    public VehicleDTO create(VehicleDTO vehicleDTO) {
+        Vehicle vehicle = vehicleMapper.toEntity(vehicleDTO);
+        Vehicle saved = vehicleRepository.save(vehicle);
+        return vehicleMapper.toDTO(saved);
     }
 
     @Transactional
-    public Vehicle update(Vehicle vehicle) {
-        return vehicleRepository.save(vehicle);
+    public VehicleDTO update(VehicleDTO vehicleDTO) {
+        Vehicle vehicle = vehicleMapper.toEntity(vehicleDTO);
+        Vehicle updated = vehicleRepository.save(vehicle);
+        return vehicleMapper.toDTO(updated);
     }
 
     @Transactional
-
-
     public Boolean delete(int id) {
         return vehicleRepository.findById(id)
                 .map(vehicle -> {
@@ -36,8 +41,7 @@ public class VehicleService implements VehicleServiceInterface {
                 .orElse(false);
     }
 
-
-
-
-
+    public List<VehicleDTO> getAll() {
+        return vehicleMapper.toDTOList(vehicleRepository.findAll());
+    }
 }

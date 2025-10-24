@@ -1,86 +1,47 @@
 package com.deliveryoptimizer.Model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Vehicle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    private double maxWeight;
-    private double maxVolume;
-    private int maxDeliveries;
+    private Long id;
 
     @Enumerated(EnumType.STRING)
-    private VehicleType vehicleType;
+    private VehicleType type;
 
+    private Double maxWeight; // Capacity in kg
+    private Double maxVolume; // Capacity in m³
+    private Integer maxDeliveries; // Max deliveries per tour
 
-    @OneToOne(mappedBy = "vehicle")
-    @JsonBackReference
-    private Tour tour;
-
-    private double latitude;
-    private double longitude;
+    @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Tour> tours;
 
     public Vehicle() {}
 
     // Getters and setters
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public double getMaxWeight() {
-        return maxWeight;
-    }
-    public void setMaxWeight(double maxWeight) {
-        this.maxWeight = maxWeight;
-    }
+    public VehicleType getType() { return type; }
+    public void setType(VehicleType type) { this.type = type; }
 
-    public double getMaxVolume() {
-        return maxVolume;
-    }
-    public void setMaxVolume(double maxVolume) {
-        this.maxVolume = maxVolume;
-    }
+    public Double getMaxWeight() { return maxWeight; }
+    public void setMaxWeight(Double maxWeight) { this.maxWeight = maxWeight; }
 
-    public int getMaxDeliveries() {
-        return maxDeliveries;
-    }
-    public void setMaxDeliveries(int maxDeliveries) {
-        this.maxDeliveries = maxDeliveries;
-    }
+    public Double getMaxVolume() { return maxVolume; }
+    public void setMaxVolume(Double maxVolume) { this.maxVolume = maxVolume; }
 
-    public VehicleType getVehicleType() {
-        return vehicleType;
-    }
-    public void setVehicleType(VehicleType vehicleType) {
-        this.vehicleType = vehicleType;
-    }
+    public Integer getMaxDeliveries() { return maxDeliveries; }
+    public void setMaxDeliveries(Integer maxDeliveries) { this.maxDeliveries = maxDeliveries; }
 
-    public Tour getTour() {
-        return tour;
-    }
-    public void setTour(Tour tour) {
-        this.tour = tour;
-    }
 
-    public double getLatitude() {
-        return latitude;
-    }
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
+    public List<Tour> getTours() { return tours; }
+    public void setTours(List<Tour> tours) { this.tours = tours; }
 }

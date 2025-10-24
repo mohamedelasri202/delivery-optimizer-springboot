@@ -1,9 +1,11 @@
 package com.deliveryoptimizer.Service;
 
-import com.deliveryoptimizer.Model.Vehicle;
+import com.deliveryoptimizer.DTO.VehicleDTO;
+import java.util.List;
 
 public interface VehicleServiceInterface {
-    Vehicle create(Vehicle vehicle);
-    Vehicle update(Vehicle vehicle);
+    VehicleDTO create(VehicleDTO vehicleDTO);
+    VehicleDTO update(VehicleDTO vehicleDTO);
     Boolean delete(int id);
+    List<VehicleDTO> getAll();
 }

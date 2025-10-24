@@ -27,50 +27,24 @@ public class Delivery {
     public Delivery() {}
 
     // Getters and setters
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
-    }
+    public long getId() { return id; }
+    public void setId(long id) { this.id = id; }
 
-    public double getLatitude() {
-        return latitude;
-    }
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
+    public double getLatitude() { return latitude; }
+    public void setLatitude(double latitude) { this.latitude = latitude; }
 
-    public double getLongitude() {
-        return longitude;
-    }
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
+    public double getLongitude() { return longitude; }
+    public void setLongitude(double longitude) { this.longitude = longitude; }
 
-    public double getWeight() {
-        return weight;
-    }
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
+    public double getWeight() { return weight; }
+    public void setWeight(double weight) { this.weight = weight; }
 
-    public double getVolume() {
-        return volume;
-    }
-    public void setVolume(double volume) {
-        this.volume = volume;
-    }
+    public double getVolume() { return volume; }
+    public void setVolume(double volume) { this.volume = volume; }
 
-    public DeliveryStatus getStatus() {
-        return status;
-    }
-    public void setStatus(DeliveryStatus status) {
-        this.status = status;
-    }
+    public DeliveryStatus getStatus() { return status; }
+    public void setStatus(DeliveryStatus status) { this.status = status; }
 
-    public Tour getTour() {
-        return tour; }
-    public void setTour(Tour tour) {
-        this.tour = tour; }
+    public Tour getTour() { return tour; }
+    public void setTour(Tour tour) { this.tour = tour; }
 }

@@ -18,9 +18,11 @@
 
     <jpa:repositories base-package="com.deliveryoptimizer.Repositories" />
 
+    <bean id="vehicleMapper" class="com.deliveryoptimizer.Mapper.VehicleMapperImpl"/>
 
     <bean id="vehicleService" class="com.deliveryoptimizer.Service.VehicleService">
         <constructor-arg ref="vehicleRepository" />
+        <constructor-arg ref="vehicleMapper" />
     </bean>
 
     <bean id="deliveryService" class="com.deliveryoptimizer.Service.DeliveryService">

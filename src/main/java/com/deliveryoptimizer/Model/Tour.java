@@ -1,5 +1,6 @@
 package com.deliveryoptimizer.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.time.LocalDate;
@@ -17,18 +18,18 @@ public class Tour {
     @Enumerated(EnumType.STRING)
     private TourType tourType;
 
-
+    // Many tours belong to one warehouse
     @ManyToOne
     @JoinColumn(name = "warehouse_id")
     private Warehouse warehouse;
 
-
-    @OneToOne(cascade = CascadeType.ALL)
+    // Many tours use one vehicle
+    @ManyToOne
     @JoinColumn(name = "vehicle_id")
-    @JsonManagedReference
+    @JsonBackReference
     private Vehicle vehicle;
 
-
+    // One tour has many deliveries
     @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Delivery> deliveries;
@@ -36,45 +37,21 @@ public class Tour {
     public Tour() {}
 
     // Getters and setters
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public LocalDate getDate() {
-        return date;
-    }
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
+    public LocalDate getDate() { return date; }
+    public void setDate(LocalDate date) { this.date = date; }
 
-    public TourType getTourType() {
-        return tourType;
-    }
-    public void setTourType(TourType tourType) {
-        this.tourType = tourType;
-    }
+    public TourType getTourType() { return tourType; }
+    public void setTourType(TourType tourType) { this.tourType = tourType; }
 
-    public Warehouse getWarehouse() {
-        return warehouse;
-    }
-    public void setWarehouse(Warehouse warehouse) {
-        this.warehouse = warehouse;
-    }
+    public Warehouse getWarehouse() { return warehouse; }
+    public void setWarehouse(Warehouse warehouse) { this.warehouse = warehouse; }
 
-    public Vehicle getVehicle() {
-        return vehicle;
-    }
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
-    }
+    public Vehicle getVehicle() { return vehicle; }
+    public void setVehicle(Vehicle vehicle) { this.vehicle = vehicle; }
 
-    public List<Delivery> getDeliveries() {
-        return deliveries;
-    }
-    public void setDeliveries(List<Delivery> deliveries) {
-        this.deliveries = deliveries;
-    }
+    public List<Delivery> getDeliveries() { return deliveries; }
+    public void setDeliveries(List<Delivery> deliveries) { this.deliveries = deliveries; }
 }
