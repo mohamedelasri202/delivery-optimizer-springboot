@@ -33,6 +33,17 @@
         <constructor-arg ref="wareHouseRepository"/>
         <constructor-arg ref="warehouseMapper"/>
     </bean>
+    <bean id="tourService" class="com.deliveryoptimizer.Service.TourService">
+        <constructor-arg ref="tourRepository" />
+        <constructor-arg ref="tourMapper" />
+        <constructor-arg ref="wareHouseRepository" />
+        <constructor-arg ref="vehicleRepository" />
+    </bean>
+
+    <bean id="tourMapper" class="com.deliveryoptimizer.Mapper.TourMapperImpl" />
+
+
+<!--    <bean id="tourMapper" class="com.deliveryoptimizer.Mapper.TourMapperImpl" />-->
 
 
 </beans>
