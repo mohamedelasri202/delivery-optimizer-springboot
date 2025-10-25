@@ -15,7 +15,7 @@ public class TourService implements TourServiceInterface {
     private final TourRepository tourRepository;
     private final TourMapper tourMapper;
     private final WareHouseRepository wareHouseRepository;
-    private final VehicleRepository vehicleRepository; // ✅ Add this
+    private final VehicleRepository vehicleRepository;
 
     public TourService(TourRepository tourRepository,
                        TourMapper tourMapper,
@@ -24,7 +24,7 @@ public class TourService implements TourServiceInterface {
         this.tourRepository = tourRepository;
         this.tourMapper = tourMapper;
         this.wareHouseRepository = wareHouseRepository;
-        this.vehicleRepository = vehicleRepository; // ✅ initialize it
+        this.vehicleRepository = vehicleRepository;
     }
 
     @Transactional

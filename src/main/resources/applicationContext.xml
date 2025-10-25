@@ -12,27 +12,32 @@
         http://www.springframework.org/schema/mvc       https://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/context   https://www.springframework.org/schema/context/spring-context.xsd">
 
-
-<!--    <context:component-scan base-package="com.deliveryoptimizer" />-->
-
-
+    <!-- ======================== -->
+    <!-- JPA REPOSITORIES -->
+    <!-- ======================== -->
     <jpa:repositories base-package="com.deliveryoptimizer.Repositories" />
 
+    <!-- ======================== -->
+    <!-- MAPPERS (MapStruct Impl) -->
+    <!-- ======================== -->
     <bean id="vehicleMapper" class="com.deliveryoptimizer.Mapper.VehicleMapperImpl"/>
+    <bean id="warehouseMapper" class="com.deliveryoptimizer.Mapper.WarehouseMapperImpl"/>
+    <bean id="tourMapper" class="com.deliveryoptimizer.Mapper.TourMapperImpl"/>
+    <bean id="deliveryMapper" class="com.deliveryoptimizer.Mapper.DeliveryMapperImpl"/>
 
+    <!-- ======================== -->
+    <!-- SERVICES -->
+    <!-- ======================== -->
     <bean id="vehicleService" class="com.deliveryoptimizer.Service.VehicleService">
         <constructor-arg ref="vehicleRepository" />
         <constructor-arg ref="vehicleMapper" />
     </bean>
 
-    <bean id="deliveryService" class="com.deliveryoptimizer.Service.DeliveryService">
-        <constructor-arg ref="deliveryRepository"/>
-    </bean>
-    <bean id="warehouseMapper" class="com.deliveryoptimizer.Mapper.WarehouseMapperImpl" />
     <bean id="wareHouseService" class="com.deliveryoptimizer.Service.WareHouseService">
         <constructor-arg ref="wareHouseRepository"/>
         <constructor-arg ref="warehouseMapper"/>
     </bean>
+
     <bean id="tourService" class="com.deliveryoptimizer.Service.TourService">
         <constructor-arg ref="tourRepository" />
         <constructor-arg ref="tourMapper" />
@@ -40,10 +45,19 @@
         <constructor-arg ref="vehicleRepository" />
     </bean>
 
-    <bean id="tourMapper" class="com.deliveryoptimizer.Mapper.TourMapperImpl" />
+    <!-- ✅ DeliveryService (matches constructor perfectly) -->
+    <bean id="deliveryService" class="com.deliveryoptimizer.Service.DeliveryService">
+        <constructor-arg ref="deliveryRepository"/>
+        <constructor-arg ref="tourRepository"/>
+        <constructor-arg ref="deliveryMapper"/>
+    </bean>
 
-
-<!--    <bean id="tourMapper" class="com.deliveryoptimizer.Mapper.TourMapperImpl" />-->
-
+    <!-- 🚫 REMOVE THIS BLOCK COMPLETELY -->
+    <!-- Because you already have @RestController in DeliveryController -->
+    <!--
+    <bean id="deliveryController" class="com.deliveryoptimizer.Controller.DeliveryController">
+        <constructor-arg ref="deliveryService"/>
+    </bean>
+    -->
 
 </beans>
