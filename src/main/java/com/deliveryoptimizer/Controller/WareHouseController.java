@@ -20,7 +20,7 @@ public class WareHouseController {
         this.warehouseMapper = warehouseMapper;
     }
 
-    // ✅ CREATE Warehouse
+
     @PostMapping
     public ResponseEntity<WarehouseDTO> createWarehouse(@RequestBody WarehouseDTO warehouseDTO) {
         Warehouse warehouse = warehouseMapper.toEntity(warehouseDTO);
@@ -29,7 +29,7 @@ public class WareHouseController {
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }
 
-    // ✅ UPDATE Warehouse
+
     @PutMapping("/{id}")
     public ResponseEntity<WarehouseDTO> updateWarehouse(@PathVariable int id, @RequestBody WarehouseDTO warehouseDTO) {
         Warehouse warehouse = warehouseMapper.toEntity(warehouseDTO);
@@ -39,7 +39,7 @@ public class WareHouseController {
         return ResponseEntity.ok(responseDTO);
     }
 
-    // ✅ DELETE Warehouse
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteWarehouse(@PathVariable int id) {
         Boolean deleted = wareHouseService.deleteWarehouse(id);
