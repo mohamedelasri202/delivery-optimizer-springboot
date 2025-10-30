@@ -39,21 +39,29 @@
     </bean>
 
     <bean id="tourService" class="com.deliveryoptimizer.Service.TourService">
-        <constructor-arg ref="tourRepository" />
-        <constructor-arg ref="tourMapper" />
-        <constructor-arg ref="wareHouseRepository" />
-        <constructor-arg ref="vehicleRepository" />
+        <constructor-arg ref="tourRepository"/>
+        <constructor-arg ref="tourMapper"/>
+        <constructor-arg ref="wareHouseRepository"/>
+        <constructor-arg ref="vehicleRepository"/>
+        <constructor-arg ref="nearestNeighborOptimizer"/>
+        <constructor-arg ref="clarkeWrightOptimizer"/>
+        <constructor-arg ref="optimizedTourMapper"/>
     </bean>
 
-    <!-- ✅ DeliveryService (matches constructor perfectly) -->
+    <bean id="optimizedTourMapper" class="com.deliveryoptimizer.Mapper.OptimizedTourMapperImpl"/>
+
+    <bean id="nearestNeighborOptimizer" class="com.deliveryoptimizer.Optimizer.NearestNeighborOptimizer"/>
+    <bean id="clarkeWrightOptimizer" class="com.deliveryoptimizer.Optimizer.ClarkeWrightOptimizer"/>
+
+
+    <!--  DeliveryService (matches constructor perfectly) -->
     <bean id="deliveryService" class="com.deliveryoptimizer.Service.DeliveryService">
         <constructor-arg ref="deliveryRepository"/>
         <constructor-arg ref="tourRepository"/>
         <constructor-arg ref="deliveryMapper"/>
     </bean>
 
-    <!-- 🚫 REMOVE THIS BLOCK COMPLETELY -->
-    <!-- Because you already have @RestController in DeliveryController -->
+
     <!--
     <bean id="deliveryController" class="com.deliveryoptimizer.Controller.DeliveryController">
         <constructor-arg ref="deliveryService"/>
