@@ -6,8 +6,12 @@ import com.deliveryoptimizer.Model.Delivery;
 import com.deliveryoptimizer.Model.Tour;
 import com.deliveryoptimizer.Repositories.DeliveryRepository;
 import com.deliveryoptimizer.Repositories.TourRepository;
+import com.deliveryoptimizer.util.VehicleCapacityChecker;
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 
+
+@Slf4j
 public class DeliveryService implements DeleveryServiceInrerface {
 
     private final DeliveryRepository deliveryRepository;
@@ -23,26 +27,58 @@ public class DeliveryService implements DeleveryServiceInrerface {
     @Transactional
     @Override
     public Delivery create(DeliveryDTO dto) {
-        Delivery delivery = deliveryMapper.toEntity(dto);
+
+        log.info("Starting creation process for new delivery.");
+
+        Delivery newDelivery = deliveryMapper.toEntity(dto);
 
         if (dto.getTourId() != null) {
-            Tour tour = tourRepository.findById(dto.getTourId().intValue())
+
+
+            log.debug("Attempting to fetch Tour ID {} for validation.", dto.getTourId());
+
+
+            Tour tour = tourRepository.findByIdWithDetails(dto.getTourId().intValue())
                     .orElseThrow(() -> new RuntimeException("Tour not found with id " + dto.getTourId()));
-            delivery.setTour(tour);
+
+
+            log.debug("Tour ID {} fetched successfully. Starting capacity check.", tour.getId());
+
+
+            VehicleCapacityChecker.validateNewDeliveryLoad(
+                    tour.getId(),
+                    tour.getVehicle(),
+                    tour.getDeliveries(),
+                    newDelivery
+            );
+
+
+            log.info("Capacity check passed. Linking delivery to Tour ID {}.", tour.getId());
+
+            newDelivery.setTour(tour);
         }
 
-        return deliveryRepository.save(delivery);
+        Delivery savedDelivery = deliveryRepository.save(newDelivery);
+
+        log.info("Delivery ID {} successfully created and saved.", savedDelivery.getId());
+
+        return savedDelivery;
     }
 
     @Transactional
     @Override
     public Delivery update(Delivery delivery) {
-        return deliveryRepository.save(delivery);
+        log.info("Updating delivery ID {}.", delivery.getId());
+        Delivery updatedDelivery = deliveryRepository.save(delivery);
+        log.info("Delivery ID {} successfully updated.", updatedDelivery.getId());
+        return updatedDelivery;
     }
 
     @Transactional
     @Override
     public void delete(int id) {
+        log.warn("Attempting to delete delivery ID {}.", id);
         deliveryRepository.deleteById(id);
+        log.info("Delivery ID {} successfully deleted.", id);
     }
 }
