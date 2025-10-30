@@ -18,7 +18,7 @@ public class Tour {
     @Enumerated(EnumType.STRING)
     private TourType tourType;
 
-    // Many tours belong to one warehouse
+
     @ManyToOne
     @JoinColumn(name = "warehouse_id")
     private Warehouse warehouse;
@@ -29,7 +29,7 @@ public class Tour {
     @JsonBackReference
     private Vehicle vehicle;
 
-    // One tour has many deliveries
+
     @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Delivery> deliveries;
