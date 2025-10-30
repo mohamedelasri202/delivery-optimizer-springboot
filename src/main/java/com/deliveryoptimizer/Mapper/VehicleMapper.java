@@ -16,7 +16,7 @@ public interface VehicleMapper {
     VehicleDTO toDTO(Vehicle vehicle);
 
     @Mappings({
-            @Mapping(target = "tours", ignore = true) // we don’t map tours from DTO
+            @Mapping(target = "tours", ignore = true)
     })
     Vehicle toEntity(VehicleDTO dto);
 
