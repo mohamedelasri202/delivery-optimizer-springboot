@@ -10,29 +10,51 @@ public class VehicleDTO {
     private Double maxWeight;
     private Double maxVolume;
     private Integer maxDeliveries;
-    private String registrationNumber;
 
-    // Optional: You can include Tour IDs if you want to expose relations safely
+
+
     private List<Integer> tourIds;
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public VehicleType getType() { return type; }
-    public void setType(VehicleType type) { this.type = type; }
+    public VehicleType getType() {
+        return type;
+    }
+    public void setType(VehicleType type) {
+        this.type = type;
+    }
 
-    public Double getMaxWeight() { return maxWeight; }
-    public void setMaxWeight(Double maxWeight) { this.maxWeight = maxWeight; }
+    public Double getMaxWeight() {
+        return maxWeight;
+    }
+    public void setMaxWeight(Double maxWeight) {
+        this.maxWeight = maxWeight;
+    }
 
-    public Double getMaxVolume() { return maxVolume; }
-    public void setMaxVolume(Double maxVolume) { this.maxVolume = maxVolume; }
+    public Double getMaxVolume() {
+        return maxVolume;
+    }
+    public void setMaxVolume(Double maxVolume) {
+        this.maxVolume = maxVolume;
+    }
 
-    public Integer getMaxDeliveries() { return maxDeliveries; }
-    public void setMaxDeliveries(Integer maxDeliveries) { this.maxDeliveries = maxDeliveries; }
+    public Integer getMaxDeliveries() {
+        return maxDeliveries;
+    }
+    public void setMaxDeliveries(Integer maxDeliveries) {
+        this.maxDeliveries = maxDeliveries;
+    }
 
-    public String getRegistrationNumber() { return registrationNumber; }
-    public void setRegistrationNumber(String registrationNumber) { this.registrationNumber = registrationNumber; }
 
-    public List<Integer> getTourIds() { return tourIds; }
-    public void setTourIds(List<Integer> tourIds) { this.tourIds = tourIds; }
+    public List<Integer> getTourIds() {
+        return tourIds;
+    }
+    public void setTourIds(List<Integer> tourIds) {
+        this.tourIds = tourIds;
+    }
 }
