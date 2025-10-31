@@ -41,7 +41,7 @@ public class TourRepositoryTest {
         warehouse.setLongitude(-7.5898);
         wareHouseRepository.saveAndFlush(warehouse);
 
-        // 🚐 Create vehicle
+        //  Create vehicle
         Vehicle vehicle = new Vehicle();
         vehicle.setType(VehicleType.TRUCK);
         vehicle.setMaxWeight(2000.0);
@@ -49,13 +49,12 @@ public class TourRepositoryTest {
         vehicle.setMaxDeliveries(50);
         vehicleRepository.saveAndFlush(vehicle);
 
-        // 🚛 Create tour
+        //  Create tour
         Tour tour = new Tour();
         tour.setTourType(ClarkeWrightOptimizer);
         tour.setWarehouse(warehouse);
         tour.setVehicle(vehicle);
 
-        // 📦 Create deliveries
         Delivery d1 = new Delivery();
         d1.setLatitude(33.6);
         d1.setLongitude(-7.5);

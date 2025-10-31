@@ -9,7 +9,7 @@ public class WarehouseDTO {
     private double latitude;
     private double longitude;
 
-    // just store IDs of tours, not full Tour objects
+
     private List<Integer> tourIds;
 
     public long getId() { return id; }

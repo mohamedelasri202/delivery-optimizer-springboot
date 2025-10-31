@@ -14,7 +14,7 @@ import com.deliveryoptimizer.Repositories.VehicleRepository;
 import com.deliveryoptimizer.Repositories.WareHouseRepository;
 import com.deliveryoptimizer.util.DistanceCalculator;
 import jakarta.transaction.Transactional;
-import lombok.extern.slf4j.Slf4j; // ⭐️ Import SLF4J annotation
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +54,7 @@ public class TourService implements TourServiceInterface {
         log.info("Starting creation of new Tour.");
         Tour tour = tourMapper.toEntity(dto);
 
-        // Fetch and link Warehouse
+
         if (dto.getWarehouseId() != null) {
             Warehouse warehouse = wareHouseRepository.findById(dto.getWarehouseId())
                     .orElseThrow(() -> {

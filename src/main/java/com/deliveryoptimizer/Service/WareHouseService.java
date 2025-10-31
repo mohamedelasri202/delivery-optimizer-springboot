@@ -15,7 +15,7 @@ public class WareHouseService implements WareHouseServiceInterface {
     private final WareHouseRepository wareHouseRepository;
     private final WarehouseMapper warehouseMapper;
 
-    // Constructor injection (declared in applicationContext.xml)
+
     public WareHouseService(WareHouseRepository wareHouseRepository, WarehouseMapper warehouseMapper) {
         this.wareHouseRepository = wareHouseRepository;
         this.warehouseMapper = warehouseMapper;

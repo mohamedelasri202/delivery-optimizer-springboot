@@ -20,7 +20,6 @@ public class NearestNeighborOptimizer implements TourOptimizer {
         List<Delivery> orderedDeliveries = new ArrayList<>();
         List<Delivery> remaining = new ArrayList<>(deliveries);
 
-        // Start from warehouse coordinates
         double currentLat = warehouse.getLatitude();
         double currentLon = warehouse.getLongitude();
 
@@ -53,13 +52,13 @@ public class NearestNeighborOptimizer implements TourOptimizer {
         double minTotalCost = Double.MAX_VALUE;
 
         for (Delivery d : deliveries) {
-            // Distance from current position to this delivery
+
             double distToDelivery = DistanceCalculator.DistanceCalc(
                     fromLat, fromLon,
                     d.getLatitude(), d.getLongitude()
             );
 
-            // Distance from this delivery back to warehouse
+
             double distBackToWarehouse = DistanceCalculator.DistanceCalc(
                     d.getLatitude(), d.getLongitude(),
                     warehouse.getLatitude(), warehouse.getLongitude()

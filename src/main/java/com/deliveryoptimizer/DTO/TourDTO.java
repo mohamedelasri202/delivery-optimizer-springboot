@@ -17,7 +17,8 @@ public class TourDTO {
 
     public TourDTO() {}
 
-    // Getters and Setters
+
+
     public int getId() {
         return id;
     }
